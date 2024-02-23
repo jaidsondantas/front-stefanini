@@ -1,0 +1,35 @@
+@import "../../../shared/scss/variables";
+
+app-header-employee {
+  .container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $primary;
+    height: 180px;
+    padding: 0 120px;
+
+    .title {
+      font-size: 64px;
+      font-weight: bold;
+      color: white;
+      line-height: 1;
+    }
+
+    .mat-flat-button {
+      font-size: 18px;
+      padding: 16px 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .title {
+      font-size: 32px !important;
+    }
+
+    .container-header {
+      padding: 0 16px;
+      height: 120px;
+    }
+  }
+}

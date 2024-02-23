@@ -1,0 +1,8 @@
+<div class="container-header">
+  <span class="title">{{ title }}</span>
+  <ng-container *ngIf="showButton">
+    <button (click)="eventAction()" class="w-150" mat-flat-button>
+      {{ labelButton }}
+    </button>
+  </ng-container>
+</div>
