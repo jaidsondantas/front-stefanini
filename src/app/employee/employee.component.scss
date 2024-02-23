@@ -1,0 +1,11 @@
+app-employee {
+  .body-list {
+    padding: 0 120px;
+  }
+
+  @media (max-width: 767px) {
+    .body-list {
+      padding: 0 8px;
+    }
+  }
+}

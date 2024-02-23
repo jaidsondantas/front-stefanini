@@ -1,0 +1,23 @@
+app-list-employee {
+  table {
+    width: 100%;
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  td.mat-cell,
+  .mat-header-cell {
+    padding: 0 8px !important;
+  }
+
+  .not-found, .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}

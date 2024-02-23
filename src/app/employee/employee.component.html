@@ -1,0 +1,20 @@
+<section>
+  <app-header-employee
+    (clickedButton)="goPageAdd()"
+    title="Employees"
+    labelButton="Add"
+  ></app-header-employee>
+  <div class="body-list mt-16">
+    <app-filter-employee
+      (changeValue)="doFilter($event)"
+    >
+    </app-filter-employee>
+    <app-list-employee
+      [employees]="employees"
+      (edit)="goEdit($event)"
+      (view)="goView($event)"
+      (delete)="remove($event)"
+    >
+    </app-list-employee>
+  </div>
+</section>

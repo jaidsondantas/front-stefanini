@@ -1,0 +1,52 @@
+<div class="table-container">
+  <ng-container>
+    <table mat-table [dataSource]="employees">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let employee">{{ employee.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let employee">{{ employee.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef>Age</th>
+        <td mat-cell *matCellDef="let employee">{{ employee.age }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="office">
+        <th mat-header-cell *matHeaderCellDef>Office</th>
+        <td mat-cell *matCellDef="let employee">{{ employee.office }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let employee">
+          <mat-icon (click)="view.emit(employee)" color="primary" class="cursor-pointer secondary-text">visibility
+          </mat-icon>
+          <mat-icon (click)="edit.emit(employee)" color="accent" class="cursor-pointer ml-16"
+          >edit
+          </mat-icon
+          >
+          <mat-icon [ngClass]="{disabled: deleting.indexOf(employee.id) > -1}"
+                    (click)="delete.emit(employee.id); deleting.push(employee.id)" color="warn"
+                    class=" cursor-pointer ml-16"
+          >delete
+          </mat-icon
+          >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </ng-container>
+  <ng-container *ngIf="!employees.length">
+    <div class="not-found pt-32 pb-32">
+      <span>Nenhum registro encontrado</span>
+    </div>
+  </ng-container>
+</div>
+
