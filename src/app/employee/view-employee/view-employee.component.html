@@ -1,0 +1,28 @@
+<section>
+  <app-header-employee
+    title="Show Employee"
+    labelButton="Editar"
+    [showButton]="false"
+  ></app-header-employee>
+  <div class="body-view">
+    <div class="row mt-32">
+      <div class="field">
+        <span class="title">Name</span>
+        <span>{{ employee.name }}</span>
+      </div>
+      <div class="field">
+        <span class="title">Age</span>
+        <span>{{ employee.age }}</span>
+      </div>
+      <div class="field">
+        <span class="title">Office</span>
+        <span>{{ employee.office }}</span>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button mat-flat-button (click)="dialog.close(enum.CANCEL)" color="warn" class="mr-16">
+        <span class="pl-16 pr-16">Back</span>
+      </button>
+    </div>
+  </div>
+</section>
