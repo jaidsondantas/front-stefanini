@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import "shared/scss/breakpoints";
+@import "shared/scss/helpers";
+// regular style toast
+@import 'ngx-toastr/toastr';
+@import "shared/scss/variables";
+@import "shared/scss/global";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
