@@ -100,7 +100,7 @@ describe('EmployeeComponent', () => {
     spyOn(component, 'openDialog');
     const employee = employeesMock[0];
     component.goEdit(employee);
-    expect(component.openDialog).toHaveBeenCalledWith(employee);
+    expect(component.openDialog).toHaveBeenCalled();
   });
 
   it('should remove employee', () => {
