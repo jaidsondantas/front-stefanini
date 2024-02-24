@@ -1,12 +1,23 @@
-import {Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Employee} from 'src/shared/interfaces/employee.interface';
-import {EmployeeService} from 'src/shared/services/employee.service';
-import {Subscription} from 'rxjs';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ResultAfterCloseDialogE} from '../../../shared/enums/result-after-close-dialog.e';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Employee } from 'src/shared/interfaces/employee.interface';
+import { EmployeeService } from 'src/shared/services/employee.service';
+import { Subscription } from 'rxjs';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ResultAfterCloseDialogE } from '../../../shared/enums/result-after-close-dialog.enum';
 
 @Component({
   selector: 'app-edit-employee',
@@ -16,7 +27,7 @@ import {ResultAfterCloseDialogE} from '../../../shared/enums/result-after-close-
 })
 export class EditEmployeeComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  id?: number;
+  id?: string;
   employee?: Employee;
 
   //Observables
@@ -27,16 +38,14 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly employeeService: EmployeeService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute,
     private toaster: ToastrService,
     public dialog: MatDialogRef<EditEmployeeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data?: Employee,
+    @Inject(MAT_DIALOG_DATA) public data?: Employee
   ) {
     this.form = this.formBuilder.group({
       name: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
-      office: new FormControl('', Validators.required,),
+      office: new FormControl('', Validators.required),
     });
 
     this.id = data?.id;
@@ -56,7 +65,7 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.employee) {
-      this.form.patchValue({...this.employee});
+      this.form.patchValue({ ...this.employee });
     }
   }
 
@@ -64,7 +73,7 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       const body: Employee = {
         ...this.form.value,
-        age: Number(this.form.get('age')?.value)
+        age: Number(this.form.get('age')?.value),
       };
 
       const saveCallback = (successMessage: string) => {
@@ -74,14 +83,15 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
 
       const errorCallback = () => {
         this.toaster.error(`Failed to save employee, try again`);
-
       };
 
       if (this.id) {
-        this.saveSubscription = this.employeeService.update(this.id, body).subscribe({
-          next: (res) => saveCallback(`Employee updated successfully.`),
-          error: errorCallback,
-        });
+        this.saveSubscription = this.employeeService
+          .update(this.id, body)
+          .subscribe({
+            next: (res) => saveCallback(`Employee updated successfully.`),
+            error: errorCallback,
+          });
       } else {
         this.saveSubscription = this.employeeService.create(body).subscribe({
           next: (res) => saveCallback(`Employee created successfully.`),
@@ -92,8 +102,6 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
   }
 
   close(result: ResultAfterCloseDialogE): void {
-    this.dialog.close(result)
+    this.dialog.close(result);
   }
-
-
 }
