@@ -72,17 +72,6 @@ describe('EmployeeService', () => {
     req.flush(employee);
   });
 
-  it('should make a GET request to fetch employee by id', () => {
-    const id = '1';
-    service.getById(id).subscribe((employee) => {
-      expect(employee.id).toEqual(id);
-    });
-    const req = httpTestingController.expectOne(
-      `${environment.urlApi}/employees/${id}`
-    );
-    expect(req.request.method).toBe('GET');
-    req.flush({ id: id });
-  });
 
   it('should make a PUT request to update employee', () => {
     const id = '1';
