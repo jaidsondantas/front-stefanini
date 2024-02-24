@@ -1,5 +1,11 @@
-import {Component, EventEmitter, Input, Output, ViewEncapsulation,} from '@angular/core';
-import {Employee} from '../../../shared/interfaces/employee.interface';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Employee } from '../../../shared/interfaces/employee.interface';
 
 @Component({
   selector: 'app-list-employee',
@@ -11,15 +17,9 @@ export class ListEmployeeComponent {
   @Input() employees: Employee[] = [];
   @Output() edit = new EventEmitter<Employee>();
   @Output() view = new EventEmitter<Employee>();
-  @Output() delete = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<string>();
 
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'age',
-    'office',
-    'actions',
-  ];
+  displayedColumns: string[] = ['id', 'name', 'age', 'office', 'actions'];
 
-  deleting: number[] = [];
+  deleting: string[] = [];
 }
