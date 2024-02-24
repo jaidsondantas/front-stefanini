@@ -1,27 +1,36 @@
-# FrontStefanini
+# Projeto CRUD de Funcionários
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
+Este é um projeto Angular que oferece funcionalidades de um CRUD para o cadastro de funcionários. Abaixo você encontrará um breve resumo do projeto, um passo a passo para executá-lo em sua máquina e informações sobre os testes unitários.
 
-## Development server
+## Resumo do Projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O projeto consiste em uma aplicação Angular na qual é possível cadastrar, listar, editar e remover funcionários. A interface permite a entrada de informações pessoais e profissionais do funcionário, além de permitir a edição dos mesmos. Essa aplicação foi desenvolvida seguindo as práticas recomendadas do Angular na versão 13.3.11.
 
-## Code scaffolding
+## Passo a Passo para Executar o Projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para rodar o projeto em sua máquina, siga os passos abaixo:
 
-## Build
+1. Certifique-se de ter a versão mínima do Node.js instalada (recomendamos a versão 14.15.4 ou superior).
+2. Faça o clone deste repositório em um diretório local.
+3. Abra um terminal na pasta raiz do projeto.
+4. Execute o comando `npm install` para instalar todas as dependências do projeto.
+5. Após a instalação das dependências, execute o comando `npm start`.
+6. Aguarde até que a aplicação esteja compilada e o servidor estará disponível no endereço [http://localhost:4200](http://localhost:4200).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Testes Unitários
 
-## Running unit tests
+Este projeto possui testes unitários implementados utilizando o framework Karma. Os testes garantem a correta funcionalidade das principais funcionalidades da aplicação.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para rodar os testes, siga os passos abaixo:
 
-## Running end-to-end tests
+1. Após realizar o clone do repositório e instalar as dependências (conforme descrito acima), abra um terminal na pasta raiz do projeto.
+2. Execute o comando `npm test`.
+3. Aguarde até que todos os testes sejam executados e visualizará os resultados no terminal.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Créditos
 
-## Further help
+Este projeto foi desenvolvido por Jaidson Dantas no mês de Fevereiro de 2024.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Licença
+
+Este projeto está licenciado sob a MIT License.
