@@ -19,7 +19,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatNativeDateModule} from '@angular/material/core';
 import {ViewEmployeeComponent} from './view-employee/view-employee.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {LoadingModule} from '../../shared/components/loading/loading.module';
 import {MatDialogModule} from '@angular/material/dialog';
 
 const routes: Routes = [
@@ -55,7 +54,6 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    LoadingModule,
     MatDialogModule
   ],
 })
