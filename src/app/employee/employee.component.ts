@@ -1,14 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { EmployeeService } from '../../shared/services/employee.service';
-import { Employee } from '../../shared/interfaces/employee.interface';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { LoadingService } from '../../shared/components/loading/loading.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { ResultAfterCloseDialogE } from '../../shared/enums/result-after-close-dialog.enum';
+import { Employee } from '../../shared/interfaces/employee.interface';
+import { EmployeeService } from '../../shared/services/employee.service';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
-import { ResultAfterCloseDialogE } from '../../shared/enums/result-after-close-dialog.e';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employee',
@@ -47,52 +45,45 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   getEmployees(): void {
     this.employeeService.get().subscribe({
-      next: (employees) => {
-        this.employees = employees;
-        this.employeesFull = [...employees];
-      },
-      error: (error) => {
-        this.toastr.error(error.message);
-      },
+      next: (employees) => this.handleGetEmployeesSuccess(employees),
+      error: (error) => this.handleGetEmployeesError(error),
     });
   }
 
-  goPageAdd(): void {
-    this.openDialog();
+  handleGetEmployeesSuccess(employees: any[]): void {
+    this.employees = employees;
+    this.employeesFull = [...employees];
   }
 
-  openDialog(employee?: Employee) {
+  handleGetEmployeesError(error: any): void {
+    this.toastr.error(error.message);
+  }
+
+  goPageAdd(): void {
+    this.openDialog(EditEmployeeComponent);
+  }
+
+  openDialog(component: any, data?: Employee): void {
     this.dialogSubscription = this.dialog
-      .open(EditEmployeeComponent, {
-        data: employee,
-      })
+      .open(component, { data })
       .afterClosed()
-      .subscribe({
-        next: (result: ResultAfterCloseDialogE) => {
-          if (result === ResultAfterCloseDialogE.SUCCESS) {
-            this.getEmployees();
-          }
-        },
+      .subscribe((result: ResultAfterCloseDialogE) => {
+        this.handleDialogResult(result);
       });
+  }
+
+  handleDialogResult(result: ResultAfterCloseDialogE): void {
+    if (result === ResultAfterCloseDialogE.SUCCESS) {
+      this.getEmployees();
+    }
   }
 
   goEdit(employee: Employee): void {
-    this.openDialog(employee);
+    this.openDialog(EditEmployeeComponent, employee);
   }
 
   goView(employee: Employee): void {
-    this.dialogSubscription = this.dialog
-      .open(ViewEmployeeComponent, {
-        data: employee,
-      })
-      .afterClosed()
-      .subscribe({
-        next: (result: ResultAfterCloseDialogE) => {
-          if (result === ResultAfterCloseDialogE.SUCCESS) {
-            this.getEmployees();
-          }
-        },
-      });
+    this.openDialog(ViewEmployeeComponent, employee);
   }
 
   doFilter(str: string): void {
@@ -101,13 +92,20 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     );
   }
 
-  remove(id: number): void {
-    if (id)
-      this.deleteSubscription = this.employeeService.delete(id).subscribe({
-        next: () => {
-          this.toastr.success(`Successfully removed.`);
-          this.getEmployees();
-        },
-      });
+  remove(id: string): void {
+    if (!id) {
+      return;
+    }
+
+    this.deleteSubscription = this.employeeService.delete(id).subscribe({
+      next: () => {
+        this.handleDeleteSuccess();
+      },
+    });
+  }
+
+  handleDeleteSuccess(): void {
+    this.toastr.success(`Successfully removed.`);
+    this.getEmployees();
   }
 }
