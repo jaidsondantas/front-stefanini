@@ -1,6 +1,6 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ResultAfterCloseDialogE } from '../../../shared/enums/result-after-close-dialog.e';
+import { ResultAfterCloseDialogE } from '../../../shared/enums/result-after-close-dialog.enum';
 import { Employee } from '../../../shared/interfaces/employee.interface';
 
 @Component({
