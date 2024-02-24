@@ -32,7 +32,7 @@ describe('ListEmployeeComponent', () => {
 
   it('should emit edit event when editEmployee method is called', () => {
     const employee: Employee = {
-      id: 1,
+      id: '1',
       name: 'Test Employee',
       age: 30,
       office: 'Sample Office',
@@ -44,7 +44,7 @@ describe('ListEmployeeComponent', () => {
 
   it('should emit view event when viewEmployee method is called', () => {
     const employee: Employee = {
-      id: 2,
+      id: '2',
       name: 'Another Employee',
       age: 25,
       office: 'New Office',
@@ -55,7 +55,7 @@ describe('ListEmployeeComponent', () => {
   });
 
   it('should emit delete event when deleteEmployee method is called with employee ID', () => {
-    const employeeId = 3;
+    const employeeId = '3';
     spyOn(component.delete, 'emit');
     component.delete.emit(employeeId);
     expect(component.delete.emit).toHaveBeenCalledWith(employeeId);

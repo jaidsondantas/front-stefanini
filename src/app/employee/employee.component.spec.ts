@@ -14,9 +14,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { of } from 'rxjs';
-import { LoadingModule } from 'src/shared/components/loading/loading.module';
 import { employeesMock } from 'src/shared/mocks/employee/consts';
+import { MockEmployeeService } from 'src/shared/mocks/services/employee.service.mock';
 import { EmployeeService } from '../../shared/services/employee.service';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { EmployeeComponent } from './employee.component';
@@ -24,22 +23,8 @@ import { FilterEmployeeComponent } from './filter-employee/filter-employee.compo
 import { HeaderEmployeeComponent } from './header-employee/header-employee.component';
 import { ListEmployeeComponent } from './list-employee/list-employee.component';
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
-
-class MockEmployeeService {
-  get() {
-    return of([{ id: 1, name: 'John Doe' }]);
-  }
-
-  delete(id: number) {
-    return of(true);
-  }
-}
-
-class MockToastrService {
-  error(message: string): void {}
-
-  success(message: string): void {}
-}
+import { MockToastrService } from 'src/shared/mocks/services/toastr.service.mock';
+import { of } from 'rxjs';
 
 describe('EmployeeComponent', () => {
   let component: EmployeeComponent;
@@ -73,7 +58,6 @@ describe('EmployeeComponent', () => {
         MatSlideToggleModule,
         MatNativeDateModule,
         MatProgressSpinnerModule,
-        LoadingModule,
         MatDialogModule,
       ],
       providers: [
@@ -121,14 +105,15 @@ describe('EmployeeComponent', () => {
 
   it('should remove employee', () => {
     spyOn(employeeService, 'delete').and.callThrough();
-    const id = 1;
+    const id = '1';
     component.remove(id);
     expect(employeeService.delete).toHaveBeenCalledWith(id);
   });
 
   it('should handle successful removal of employee', () => {
     spyOn(component, 'getEmployees');
-    const id = 1;
+    spyOn(employeeService, 'delete').and.returnValue(of(true));
+    const id = '1';
     component.remove(id);
     expect(component.getEmployees).toHaveBeenCalled();
   });
